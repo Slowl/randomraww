@@ -13,7 +13,7 @@ const App = () => {
   const [item, setItem] = useState('')
 
   const Request = () => {
-        fetch(`https://cors-anywhere.herokuapp.com/https://api.reddit.com/r/aww/top.json?sort=top&limit=100`)
+        fetch(`https://cors-anywhere.herokuapp.com/https://api.reddit.com/r/aww/top.json?sort=top&limit=100&raw_json=1`)
         .then(res => {
           return res.json()
         }
@@ -38,6 +38,7 @@ const App = () => {
       <Viewer rawData={item} />
       <Requestor onClick={() => Request()} request />
       <Requestor onClick={() => Next()} />
+      <div>{data.length}</div>
     </AppContainer>
   )
 }
