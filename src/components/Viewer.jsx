@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ViewerContainer = styled.div`
-  width: 70%;
+  max-width: 70%;
   margin: auto;
   background-color: #282828;
 
@@ -10,16 +10,109 @@ const ViewerContainer = styled.div`
     width: 100%;
     height: 100%;
   }
+  video {
+    max-width: 70%;
+  }
 `
 
 const Viewer = ({ rawData }) => {
 
-  rawData && console.log(rawData.data.url)
+  const data = rawData.data
+  rawData && console.log(rawData.data)
   // check data sendend in the props and fix gifs/vids display
+  const convertedGif = (gifvUrl) => {
+    if (data.domain==="i.imgur.com") {
+      const gifv = gifvUrl
+      const videoUrl = gifvUrl.replace(".gifv", ".mp4")
+      return videoUrl
+    }
+  }
 
+  //create media components
   return (
     <ViewerContainer>
-      <img src={rawData && rawData.data.url} alt="random reddit content" />
+
+      {rawData && data.domain==="v.redd.it" && (
+        <span>
+          {data.media ? (
+            <div>
+              <div>{data.title}</div>
+              <video
+                width={data.media.reddit_video.width}
+                height={data.media.reddit_video.height}
+                controls
+                preload="true"
+                autoPlay="autoplay"
+                loop="loop">
+               <source src={data.media.reddit_video.fallback_url} type="video/mp4" />
+              </video>
+            </div> ) : (
+              <div>
+                <div>{data.title}</div>
+                <video
+                  width={data.crosspost_parent_list[0].media.reddit_video.width}
+                  height={data.crosspost_parent_list[0].media.reddit_video.height}
+                  controls
+                  preload="true"
+                  autoPlay="autoplay"
+                  loop="loop">
+                 <source src={data.crosspost_parent_list[0].media.fallback_url} type="video/mp4" />
+                </video>
+              </div>
+            )
+          }
+        </span>
+
+      )}
+
+      {rawData && data.domain==="i.redd.it" && (
+        <div>
+          <div>{data.title}</div>
+          <img src={rawData && data.url} alt="random reddit content" />
+        </div>
+      )}
+
+      {rawData && (data.domain==="i.imgur.com" || data.domain==="imgur.com" ) && (
+        <div>
+          <div>{data.title}</div>
+          {
+            data.post_hint === "image" ? (
+              <img src={data.url} alt="random reddit content" />
+            ) : (
+              <video width="320" height="480" controls preload="true" autoPlay="autoplay" loop="loop">
+               <source src={convertedGif(data.url)} type="video/mp4" />
+              </video>
+
+            )
+          }
+          </div>
+      )}
+
+      {rawData && data.domain==="gfycat.com" && (
+        <div>
+          {data.media ? (
+            <div>
+              <div>{data.title}</div>
+              <div dangerouslySetInnerHTML={{__html: data.media.oembed.html}} />
+            </div>
+          ) : (
+            <div>
+              <div>{data.title}</div>
+              <video
+                width={data.preview.reddit_video_preview.width}
+                height={data.preview.reddit_video_preview.height}
+                controls
+                preload="true"
+                autoPlay="autoplay"
+                loop="loop">
+               <source src={data.preview.reddit_video_preview.fallback_url} type="video/mp4" />
+              </video>
+            </div>
+          )}
+        </div>
+
+      )}
+
     </ViewerContainer>
   )
 }
