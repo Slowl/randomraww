@@ -1,17 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import Video from './Video'
+import Img from './Img'
+import Title from './Title'
 
 const ViewerContainer = styled.div`
   margin: auto;
   background-color: #282828;
+`
 
-  img {
-
-  }
-
-  video {
-
-  }
+const MediaContainer = styled.div`
+    display: flex;
+    justify-content: center;
 `
 
 const Viewer = ({ rawData }) => {
@@ -26,41 +26,27 @@ const Viewer = ({ rawData }) => {
     }
   }
 
-  //create media components
-  //handle crosspost shit
   return (
     <ViewerContainer>
-
       {/* handle reddit vids */}
       {rawData && data.domain==="v.redd.it" && (
         <span>
+          <Title title={data.title} />
           {data.media ? (
-            <div>
-              <div>{data.title}</div>
-              <video
-                key={data.media.reddit_video.fallback_url}
-                width={data.media.reddit_video.width}
-                height={data.media.reddit_video.height}
-                controls
-                preload="true"
-                autoPlay="autoplay"
-                loop="loop">
-               <source src={data.media.reddit_video.fallback_url} type="video/mp4" />
-              </video>
-            </div> ) : (
-              <div>
-                <div>{data.title}</div>
-                <video
-                  key={data.crosspost_parent_list[0].media.fallback_url}
-                  width={data.crosspost_parent_list[0].media.reddit_video.width}
-                  height={data.crosspost_parent_list[0].media.reddit_video.height}
-                  controls
-                  preload="true"
-                  autoPlay="autoplay"
-                  loop="loop">
-                 <source src={data.crosspost_parent_list[0].media.reddit_video.fallback_url} type="video/mp4" />
-                </video>
-              </div>
+            <MediaContainer>
+              <Video
+                widht={1280}
+                height={720}
+                src={data.media.reddit_video.fallback_url}
+              />
+            </MediaContainer> ) : (
+              <MediaContainer>
+                <Video
+                  widht={1280}
+                  height={720}
+                  src={data.crosspost_parent_list[0].media.fallback_url}
+                />
+              </MediaContainer>
             )
           }
         </span>
@@ -70,91 +56,66 @@ const Viewer = ({ rawData }) => {
       {/* handle reddit img */}
       {rawData && data.domain==="i.redd.it" && (
         <div>
-          <div>{data.title}</div>
-          <img key={data.url} src={rawData && data.url} alt="random reddit content" />
+          <Title title={data.title} />
+          <MediaContainer>
+            <Img src={data.url} />
+          </MediaContainer>
         </div>
       )}
 
       {/* handle imgur */}
-      {rawData && data.domain==="i.imgur.com" && (
+      {rawData && (data.domain==="i.imgur.com" || data.domain==="imgur.com") && (
         <div>
-          <div>{data.title}</div>
-          {
-            data.post_hint === "image" ? (
-              <img key={data.url} src={data.url} alt="random reddit content" />
-            ) : (
-              <div>
-                {data.domain==="imgur.com" ? (
-                  <video
-                    key={data.url}
-                    width="320"
-                    height="480"
-                    controls
-                    preload="true"
-                    autoPlay="autoplay"
-                    loop="loop">
-                   <source src={convertedGif(data.url)} type="video/mp4" />
-                  </video>
-                ) : (
-                  <video
-                    key={data.url}
-                    width="320"
-                    height="480"
-                    controls
-                    preload="true"
-                    autoPlay="autoplay"
-                    loop="loop">
-                   <source src={convertedGif(data.url)} type="video/mp4" />
-                  </video>
-                )}
-              </div>
-            )
-          }
-          </div>
+          <Title title={data.title} />
+          <MediaContainer>
+            {
+              data.post_hint === "image" ? (
+                <Img src={data.url} />
+              ) : (
+                <Video
+                  widht={1280}
+                  height={720}
+                  src={convertedGif(data.url)}
+                />
+              )
+            }
+            </MediaContainer>
+        </div>
       )}
 
       {rawData && data.domain==="imgur.com" && data.post_hint==="link" && (
         <div>
-          <div>{data.title}</div>
-          {data.preview.images ? (
-            <img key={data.preview.images[0].source.url} src={data.preview.images[0].source.url} alt="random reddit content" />
-          ) : (
-            <video
-              key={data.preview.videos[0].source.url}
-              width={data.preview.videos[0].source.width}
-              height={data.preview.videos[0].source.height}
-              controls
-              preload="true"
-              autoPlay="autoplay"
-              loop="loop">
-             <source src={convertedGif(data.preview.videos[0].source.url)} type="video/mp4" />
-            </video>
-          )}
+          <Title title={data.title} />
+          <MediaContainer>
+            {data.preview.images ? (
+              <Img src={data.preview.images[0].source.url} />
+            ) : (
+              <Video
+                widht={1280}
+                height={720}
+                src={convertedGif(data.preview.videos[0].source.url)}
+              />
+            )}
+          </MediaContainer>
         </div>
       )}
 
       {/* handle gfycat */}
       {rawData && data.domain==="gfycat.com" && (
         <div>
+          <Title title={data.title} />
           {data.media ? (
-            <div>
-              <div>{data.title}</div>
-              <div dangerouslySetInnerHTML={{__html: data.media.oembed.html}} />
-            </div>
+            <MediaContainer>
+              <div className="gfycat-container" dangerouslySetInnerHTML={{__html: data.media.oembed.html}} />
+            </MediaContainer>
           ) : (
-            <div>
-              <div>{data.title}</div>
-              <video
-                key={data.preview.reddit_video_preview.fallback_url}
-                width={data.preview.reddit_video_preview.width}
-                height={data.preview.reddit_video_preview.height}
-                controls
-                preload="true"
-                autoPlay="autoplay"
-                loop="loop">
-               <source src={data.preview.reddit_video_preview.fallback_url} type="video/mp4" />
-              </video>
-            </div>
+            <MediaContainer>
+              <Video
+                widht={1280}
+                height={720}
+                src={data.preview.reddit_video_preview.fallback_url}
+              />
+            </MediaContainer>
           )}
         </div>
 
