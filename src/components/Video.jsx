@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const CustomVideo = styled.video`
   max-width: 100%;
   max-height: 60vh;
+  min-height: 60vh;
 `
 
 const Video = ({ width, height, src }) => {
