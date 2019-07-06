@@ -31,7 +31,6 @@ const Viewer = ({ rawData }) => {
       {/* handle reddit vids */}
       {rawData && data.domain==="v.redd.it" && (
         <span>
-          <Title title={data.title} />
           {data.media ? (
             <MediaContainer>
               <Video
@@ -56,7 +55,6 @@ const Viewer = ({ rawData }) => {
       {/* handle reddit img */}
       {rawData && data.domain==="i.redd.it" && (
         <div>
-          <Title title={data.title} />
           <MediaContainer>
             <Img src={data.url} />
           </MediaContainer>
@@ -66,7 +64,6 @@ const Viewer = ({ rawData }) => {
       {/* handle imgur */}
       {rawData && (data.domain==="i.imgur.com" || data.domain==="imgur.com") && (
         <div>
-          <Title title={data.title} />
           <MediaContainer>
             {
               data.post_hint === "image" ? (
@@ -85,7 +82,6 @@ const Viewer = ({ rawData }) => {
 
       {rawData && data.domain==="imgur.com" && data.post_hint==="link" && (
         <div>
-          <Title title={data.title} />
           <MediaContainer>
             {data.preview.images ? (
               <Img src={data.preview.images[0].source.url} />
@@ -103,7 +99,6 @@ const Viewer = ({ rawData }) => {
       {/* handle gfycat */}
       {rawData && data.domain==="gfycat.com" && (
         <div>
-          <Title title={data.title} />
           {data.media ? (
             <MediaContainer>
               <div className="gfycat-container" dangerouslySetInnerHTML={{__html: data.media.oembed.html}} />

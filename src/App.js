@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Viewer from './components/Viewer'
 import Requestor from './components/Requestor'
+import Title from './components/Title'
 
 const AppContainer = styled.div`
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap');
+  font-family: 'Open Sans', sans-serif;
   color: white;
 `
 
@@ -35,6 +38,7 @@ const App = () => {
 
   return (
     <AppContainer>
+      <Title title={item && item.data.title} />
       <Viewer rawData={item} />
       <Requestor onClick={() => Request()} request />
       <Requestor onClick={() => Next()} />
