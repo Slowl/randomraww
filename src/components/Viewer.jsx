@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import Video from './Video'
 import Img from './Img'
-import Title from './Title'
 
 const ViewerContainer = styled.div`
   background-color: #222222;
