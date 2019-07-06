@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import Viewer from './components/Viewer'
-import Requestor from './components/Requestor'
+import NavRequest from './components/NavRequest'
 import Title from './components/Title'
 
 const AppContainer = styled.div`
@@ -14,15 +14,17 @@ const App = () => {
 
   const [data, setData] = useState('')
   const [item, setItem] = useState('')
+  const [reqStatus, changeStatus] = useState(false)
 
   const Request = () => {
+        changeStatus(true)
         fetch(`https://cors-anywhere.herokuapp.com/https://api.reddit.com/r/aww/top.json?sort=top&limit=100&raw_json=1`)
         .then(res => {
           return res.json()
         }
       ).then(redditData => {
           setData(redditData.data.children)
-          console.log("ready")
+          changeStatus(false)
         }
       )
   }
@@ -40,9 +42,11 @@ const App = () => {
     <AppContainer>
       <Title title={item && item.data.title} />
       <Viewer rawData={item} />
-      <Requestor onClick={() => Request()} request />
-      <Requestor onClick={() => Next()} />
-      <div>{data.length}</div>
+      <NavRequest
+        request={() => Request()}
+        next={() => Next()}
+        length={data.length}
+        status={reqStatus} />
     </AppContainer>
   )
 }
