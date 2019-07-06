@@ -5,13 +5,19 @@ import Img from './Img'
 import Title from './Title'
 
 const ViewerContainer = styled.div`
+  background-color: #222222;
+  max-width: 80%;
   margin: auto;
-  background-color: #282828;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
 `
 
 const MediaContainer = styled.div`
-    display: flex;
+    display: inline-flex;
     justify-content: center;
+    padding: .5em;
+    width: auto;
 `
 
 const Viewer = ({ rawData }) => {
