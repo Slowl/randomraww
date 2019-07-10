@@ -18,7 +18,9 @@ const TitleContainer = styled.div`
 
 const Title = ({ title }) => {
   return (
-    <TitleContainer>{title}</TitleContainer>
+    <span>
+      {title && <TitleContainer>{title}</TitleContainer>}
+    </span>
   )
 }
 

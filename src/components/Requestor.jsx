@@ -8,6 +8,7 @@ const Button = styled.div`
   max-width: 30%;
   padding: .8em 1.5em;
   border-radius: 50px;
+  color: white;
   background-color: ${props => props.request ? "#874444" : "#448755"};
   text-align: center;
   margin: auto;
@@ -17,7 +18,7 @@ const Button = styled.div`
   .icon {
     font-size: 1.4em;
     transition: .5s;
-    animation: ${props => props.loading ? "loading .5s ease infinite;" : ""};
+    animation: ${props => props.loading && "loading .5s ease infinite;"};
 
     @keyframes loading {
       0% {transform: rotate(-0deg)}
