@@ -18,7 +18,7 @@ const App = () => {
 
   const Request = () => {
         changeStatus(true)
-        fetch(`https://cors-anywhere.herokuapp.com/https://api.reddit.com/r/aww/top.json?sort=top&limit=100&raw_json=1`)
+        fetch(`https://cors-anywhere.herokuapp.com/https://api.reddit.com/r/aww/top.json?sort=hot&limit=10&t=all&show=all&raw_json=1`)
         .then(res => {
           return res.json()
         }
@@ -31,7 +31,7 @@ const App = () => {
 
   const Next = () => {
     const random = Math.floor(Math.random() * data.length)
-    if (data){
+    if (data && data.length > 0){
       const oneItem = data[random]
       setItem(oneItem)
       data.splice(random,1)
