@@ -19,6 +19,27 @@ const MediaContainer = styled.div`
     width: auto;
 `
 
+const EmptyBloc = styled.div`
+  width: 90%;
+  padding: 4em;
+  font-size: 2em;
+  font-weight: 300;
+  word-spacing: 2px;
+  text-align: center;
+
+  span {
+    :first-child {
+      color: #874444;
+      font-weight: 400;
+    }
+
+    :last-child {
+      color: #448755;
+      font-weight: 400;
+    }
+  }
+`
+
 const Viewer = ({ rawData }) => {
 
   const data = rawData.data
@@ -120,6 +141,12 @@ const Viewer = ({ rawData }) => {
         </div>
 
       )}
+
+      {/* handle when no data */}
+      {!rawData && (
+        <EmptyBloc> Simply hit the <span>Sync</span> button to get the latest r/aww posts and <span>browse</span> them ! </EmptyBloc>
+      )
+      }
 
     </ViewerContainer>
   )
