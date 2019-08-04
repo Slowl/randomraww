@@ -44,6 +44,11 @@ const App = () => {
     }
   }
 
+  const Refresh = () => {
+    Request()
+    changeToggle(false)
+  }
+
   const changeType = e => {
     const value = e.currentTarget.textContent
     setType(value.toLowerCase())
@@ -66,6 +71,7 @@ const App = () => {
         date={(e) => changeDate(e)}
         limit={(e) => changeLimit(e)}
         toggleStatus={toggleStatus}
+        refresh={() => Refresh()}
         />
       <Navbar toggle={() => changeToggle(!toggleStatus)}/>
       <Title title={item && item.data.title} />

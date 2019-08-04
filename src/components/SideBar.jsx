@@ -5,7 +5,7 @@ import Filter from './Filter'
 const NavContainer = styled.div`
   background-color: #171717;
   position: absolute;
-  width: 400px;
+  width: 300px;
   height: 100vh;
   margin-left: ${props => props.isToggled ? '0px' : '-420px'};
   transition: ease .5s;
@@ -43,7 +43,26 @@ const FilterContainer = styled.div`
   }
 `
 
-const SideBar = ({ type, date, limit, toggleStatus }) => {
+const Refresh = styled.div`
+  position:absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: #874444;
+  opacity: .8;
+  padding: 1.5em 0;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 400;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: .5s;
+
+  :hover {
+    opacity: 1;
+  }
+`
+
+const SideBar = ({ type, date, limit, toggleStatus, refresh }) => {
 
   return (
     <NavContainer isToggled={toggleStatus}>
@@ -76,6 +95,7 @@ const SideBar = ({ type, date, limit, toggleStatus }) => {
         </FilterContainer>
       </FilterSection>
 
+      <Refresh onClick={refresh}>Apply</Refresh>
     </NavContainer>
   )
 }
