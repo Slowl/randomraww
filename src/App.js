@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Nav from './components/Nav'
+import SideBar from './components/SideBar'
+import Navbar from './components/Navbar'
 import Title from './components/Title'
 import Viewer from './components/Viewer'
 import NavRequest from './components/NavRequest'
@@ -19,6 +20,7 @@ const App = () => {
   const [type, setType] = useState('top')
   const [date, setDate] = useState('day')
   const [limit, setLimit] = useState(100)
+  const [toggleStatus, changeToggle] = useState(true)
 
   const Request = () => {
         changeStatus(true)
@@ -59,7 +61,13 @@ const App = () => {
 
   return (
     <AppContainer>
-      <Nav type={(e) => changeType(e)} date={(e) => changeDate(e)} limit={(e) => changeLimit(e)} />
+      <SideBar
+        type={(e) => changeType(e)}
+        date={(e) => changeDate(e)}
+        limit={(e) => changeLimit(e)}
+        toggleStatus={toggleStatus}
+        />
+      <Navbar toggle={() => changeToggle(!toggleStatus)}/>
       <Title title={item && item.data.title} />
       <Viewer rawData={item} />
       <NavRequest
