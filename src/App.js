@@ -20,7 +20,7 @@ const App = () => {
   const [type, setType] = useState('top')
   const [date, setDate] = useState('day')
   const [limit, setLimit] = useState(100)
-  const [toggleStatus, changeToggle] = useState(true)
+  const [toggleStatus, changeToggle] = useState(false)
 
   const Request = () => {
         changeStatus(true)
@@ -50,18 +50,18 @@ const App = () => {
   }
 
   const changeType = e => {
-    const value = e.currentTarget.textContent
-    setType(value.toLowerCase())
+    const value = e.currentTarget.textContent.toLowerCase()
+    setType(value)
   }
 
   const changeDate = e => {
-    const value = e.currentTarget.textContent
-    setDate(value.toLowerCase())
+    const value = e.currentTarget.textContent.toLowerCase()
+    setDate(value)
   }
 
   const changeLimit = e => {
-    const value = e.currentTarget.textContent
-    setLimit(value.toLowerCase())
+    const value = e.currentTarget.textContent.toLowerCase()
+    setLimit(value)
   }
 
   return (
