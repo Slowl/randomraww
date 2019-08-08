@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import Requestor from './Requestor'
-import { FiRefreshCcw } from "react-icons/fi";
-import { FiPlay } from "react-icons/fi";
+import { FiRefreshCcw } from "react-icons/fi"
+import { FiPlay } from "react-icons/fi"
 
 const NavContainer = styled.div`
   display: flex;
@@ -24,9 +24,10 @@ const Counter = styled.div`
   border-radius: 50px;
   letter-spacing: 2px;
   background-image: -webkit-linear-gradient(160deg, #282828 50%, #383838 50%);
+  transition: .3s;
 `
 
-const NavRequest = ({ next, request, length, status }) => {
+const NavRequest = ({ next, request, length, status, total }) => {
 
   const Sync = Requestor(FiRefreshCcw)
   const Next = Requestor(FiPlay)
@@ -35,7 +36,7 @@ const NavRequest = ({ next, request, length, status }) => {
 
       <Sync onClick={request} status rotator={status} request> Sync </Sync>
       <Counter>
-        <div>{length}</div>  <div>100</div>
+        <div>{length}</div>  <div>{total}</div>
       </Counter>
       <Next onClick={next}> Next </Next>
     </NavContainer>

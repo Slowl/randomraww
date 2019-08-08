@@ -80,6 +80,7 @@ const App = () => {
         request={() => Request()}
         next={() => Next()}
         length={data.length}
+        total={limit}
         status={reqStatus} />
     </AppContainer>
   )

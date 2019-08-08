@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Filter from './Filter'
+import { FiCheck } from 'react-icons/fi'
 
 const NavContainer = styled.div`
   background-color: #171717;
@@ -49,11 +50,9 @@ const Refresh = styled.div`
   bottom: 0;
   background-color: #874444;
   opacity: .8;
-  padding: 1.5em 0;
+  padding: .7em 0;
   text-align: center;
-  font-size: 1.2em;
-  font-weight: 400;
-  letter-spacing: 1px;
+  font-size: 2.2em;
   cursor: pointer;
   transition: .5s;
 
@@ -95,7 +94,7 @@ const SideBar = ({ type, date, limit, toggleStatus, refresh }) => {
         </FilterContainer>
       </FilterSection>
 
-      <Refresh onClick={refresh}>Apply</Refresh>
+      <Refresh onClick={refresh}><FiCheck /></Refresh>
     </NavContainer>
   )
 }
