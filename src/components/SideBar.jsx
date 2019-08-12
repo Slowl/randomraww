@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Filter from './Filter'
-import { FiCheck } from 'react-icons/fi'
+import { FiCheck, FiX } from 'react-icons/fi'
 
 const NavContainer = styled.div`
   background-color: #171717;
@@ -10,18 +10,18 @@ const NavContainer = styled.div`
   height: 100vh;
   margin-left: ${props => props.isToggled ? '0px' : '-420px'};
   transition: ease .5s;
+`
 
+const FilterSection = styled.div`
+  margin-top: 7.5em;
   span {
     display: block;
     text-align: center;
     font-size: 1.5em;
     font-weight: 300;
     padding: 1em;
+    margin-top: 2em;
   }
-`
-
-const FilterSection = styled.div`
-  margin: 3em 0;
 `
 
 const FilterContainer = styled.div`
@@ -32,6 +32,8 @@ const FilterContainer = styled.div`
   display: flex;
   justify-content: space-around;
   text-align:center;
+  font-size: .9em;
+  letter-spacing: 1px;
 
   div {
     :first-child{
@@ -48,7 +50,7 @@ const Refresh = styled.div`
   position:absolute;
   width: 100%;
   bottom: 0;
-  background-color: #874444;
+  background-color: #448755;
   opacity: .8;
   padding: .7em 0;
   text-align: center;
@@ -61,11 +63,28 @@ const Refresh = styled.div`
   }
 `
 
-const SideBar = ({ type, date, limit, toggleStatus, refresh }) => {
+const Close = styled.div`
+  position:absolute;
+  width: 100%;
+  top: 0;
+  color: #cfcfcf;
+  background-color: #1d1d1d;
+  padding: .2em 0 .1em 0;
+  text-align: center;
+  font-size: 2em;
+  cursor: pointer;
+  transition: .2s;
+
+  :hover {
+    color: #934545;
+  }
+`
+
+const SideBar = ({ type, date, limit, toggleStatus, refresh, close }) => {
 
   return (
     <NavContainer isToggled={toggleStatus}>
-
+      <Close onClick={close}> <span> <FiX /> </span> </Close>
       <FilterSection>
         <span>Sort by  </span>
         <FilterContainer>
@@ -73,9 +92,7 @@ const SideBar = ({ type, date, limit, toggleStatus, refresh }) => {
               <Filter onClick={type} value="Hot" />
               <Filter onClick={type} value="New" />
         </FilterContainer>
-      </FilterSection>
 
-      <FilterSection>
         <span>Select from  </span>
         <FilterContainer>
               <Filter onClick={date} value="Day" />
@@ -83,9 +100,7 @@ const SideBar = ({ type, date, limit, toggleStatus, refresh }) => {
               <Filter onClick={date} value="Month" />
               <Filter onClick={date} value="Year" />
         </FilterContainer>
-      </FilterSection>
 
-      <FilterSection>
         <span>Posts  </span>
         <FilterContainer>
              <Filter onClick={limit} value="25" />

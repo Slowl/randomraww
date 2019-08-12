@@ -11,6 +11,12 @@ const AppContainer = styled.div`
   font-family: 'Open Sans', sans-serif;
   color: white;
 `
+const Overlay = styled.div`
+  position:absolute;
+  width: 100%;
+  height: ${props => props.SidebarOpen ? "100vh" : "0" };
+  transition: .5s;
+`
 
 const App = () => {
 
@@ -65,24 +71,29 @@ const App = () => {
   }
 
   return (
-    <AppContainer>
-      <SideBar
-        type={(e) => changeType(e)}
-        date={(e) => changeDate(e)}
-        limit={(e) => changeLimit(e)}
-        toggleStatus={toggleStatus}
-        refresh={() => Refresh()}
-        />
-      <Navbar toggle={() => changeToggle(!toggleStatus)}/>
-      <Title title={item && item.data.title} />
-      <Viewer rawData={item} />
-      <NavRequest
-        request={() => Request()}
-        next={() => Next()}
-        length={data.length}
-        total={limit}
-        status={reqStatus} />
-    </AppContainer>
+    <div>
+      <Overlay onClick={() => changeToggle(false)} SidebarOpen={toggleStatus}/>
+      <AppContainer>
+          <SideBar
+            type={(e) => changeType(e)}
+            date={(e) => changeDate(e)}
+            limit={(e) => changeLimit(e)}
+            toggleStatus={toggleStatus}
+            refresh={() => Refresh()}
+            close={() => changeToggle(false)}
+            />
+          <Navbar toggle={() => changeToggle(!toggleStatus)}/>
+          <Title title={item && item.data.title} />
+          <Viewer rawData={item} />
+          <NavRequest
+            request={() => Request()}
+            next={() => Next()}
+            length={data.length}
+            total={limit}
+            status={reqStatus} />
+      </AppContainer>
+    </div>
+
   )
 }
 
