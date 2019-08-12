@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Requestor from './Requestor'
-import { FiRefreshCcw } from "react-icons/fi"
-import { FiPlay } from "react-icons/fi"
+import { FiRefreshCcw, FiPlay } from "react-icons/fi"
 
 const NavContainer = styled.div`
   display: flex;
