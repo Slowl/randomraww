@@ -9,6 +9,7 @@ const NavContainer = styled.div`
   width: 300px;
   height: 100vh;
   margin-left: ${props => props.isToggled ? '0px' : '-420px'};
+  z-index: 999;
   transition: ease .5s;
 `
 
@@ -50,16 +51,18 @@ const Refresh = styled.div`
   position:absolute;
   width: 100%;
   bottom: 0;
+  color: #afafaf;
   background-color: #448755;
   opacity: .8;
   padding: .7em 0;
   text-align: center;
   font-size: 2.2em;
   cursor: pointer;
-  transition: .5s;
+  transition: .4s;
 
   :hover {
     opacity: 1;
+    color: #ffffff;
   }
 `
 
@@ -84,7 +87,7 @@ const SideBar = ({ type, date, limit, toggleStatus, refresh, close }) => {
 
   return (
     <NavContainer isToggled={toggleStatus}>
-      <Close onClick={close}> <span> <FiX /> </span> </Close>
+      <Close onClick={close}><FiX /></Close>
       <FilterSection>
         <span>Sort by  </span>
         <FilterContainer>
