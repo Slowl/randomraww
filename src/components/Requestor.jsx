@@ -9,7 +9,7 @@ const Button = styled.div`
   padding: .8em 1.5em;
   border-radius: 50px;
   color: white;
-  background-color: ${props => props.request ? "#874444" : "#448755"};
+  background-color: ${props => props.request ? "#448755" : "#445987"};
   text-align: center;
   margin: auto;
   cursor: pointer;

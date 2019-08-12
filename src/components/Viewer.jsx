@@ -29,12 +29,12 @@ const EmptyBloc = styled.div`
 
   span {
     :first-child {
-      color: #874444;
+      color: #448755;
       font-weight: 400;
     }
 
     :last-child {
-      color: #448755;
+      color: #445987;
       font-weight: 400;
     }
   }
