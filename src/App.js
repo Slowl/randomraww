@@ -30,7 +30,7 @@ const App = () => {
 
   const Request = () => {
         changeStatus(true)
-        fetch(`https://api.reddit.com/r/aww/top.json?sort=${type}&limit=${limit}&t=${date}&show=all&raw_json=1`)
+        fetch(`https://cors-anywhere.herokuapp.com/https://api.reddit.com/r/aww/top.json?sort=${type}&limit=${limit}&t=${date}&show=all&raw_json=1`)
         .then(res => {
           return res.json()
         }
