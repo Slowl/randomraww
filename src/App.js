@@ -42,11 +42,11 @@ const App = () => {
   }
 
   const Next = () => {
-    const random = Math.floor(Math.random() * data.length)
+    const index = Math.floor(data.length - 1)
     if (data && data.length > 0){
-      const oneItem = data[random]
+      const oneItem = data[index]
       setItem(oneItem)
-      data.splice(random,1)
+      setData(data.slice(0, index).concat(data.slice(index+1)))
     }
   }
 
