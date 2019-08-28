@@ -46,7 +46,7 @@ const App = () => {
     if (data && data.length > 0){
       const oneItem = data[index]
       setItem(oneItem)
-      setData(data.slice(0, index).concat(data.slice(index+1)))
+      setData([...data.slice(0, index), ...data.slice(index+1)])
     }
   }
 
